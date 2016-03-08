@@ -7,13 +7,15 @@ app.config(function ($stateProvider) {
     });
 });
 
+// AW: not a good name for a factory.
+// also, best to give each factory its own file so the app is easier to navigate
 app.factory('addReviewFactory', function($http){
     return {
         addNewReview: function(newreview){
             console.log("I am going to post your review",newreview)
             return $http.post('/api/reviews', newreview)
             .then(function(review){
-                return review;
+                return review;    // this isn't doing anything 
             });
         }
     }

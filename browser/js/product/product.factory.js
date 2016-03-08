@@ -28,4 +28,37 @@ app.factory('ProductFactory', function ($http) {
 
   return ProductFactory;
 
+  /*
+    
+    AW: just want to make sure you folks know that you can do this like so
+
+      return {
+  
+        fetchAll: function () {
+          return $http.get('/api/products')
+          .then(response => response.data);
+        }, 
+
+        fetchById: function (id) {
+          return $http.get('/api/products/' + id)
+          .then(response => response.data);
+        }, 
+
+        fetchAllReviewsByProductId: function(id) {
+          return $http.get('/api/products/' + id + '/reviews')
+          .then(function(response) {
+            return response.data;
+          });
+        },
+
+        createNewProduct: function(newProductObj) {
+          return $http.post('api/products/addproduct', newProductObj)
+          .then(response => response.data);
+        }
+
+      }
+
+
+  */
+
 });
