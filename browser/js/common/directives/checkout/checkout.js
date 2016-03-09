@@ -8,7 +8,7 @@ app.config(function ($stateProvider) {
     }
   });
 });
-
+// AW: why is this in the directives folder?
 app.controller('checkoutCtl', function($scope, theUser, UserFactory){
     var user = theUser;
 

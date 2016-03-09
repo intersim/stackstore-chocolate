@@ -85,6 +85,27 @@ OrderSchema.statics.findOrCreate = function (userId) {
     });
 };
 
+// AW: another way to write findORCREATE
+/*
+
+OrderSchema.statics.findOrCreate = function (userId) {
+  // bind allows us to set the `this` of the promise to the `this` of a static definition --
+  // the Model/Collection
+  return Promise.resolve(this.findOne({user: userId, status: "inProgress"})).bind(this)
+  .deepPopulate('item allItems.item')
+    .then(function (order) {
+      if (!order) {
+        return this.create({user: userId});
+      } else {
+        return order;
+      }
+    });
+};
+
+
+
+*/
+
 OrderSchema.methods.addItem = function(itemData) {
   var order = this;
   var newItem;
@@ -98,6 +119,27 @@ OrderSchema.methods.addItem = function(itemData) {
     return newItem;
   });
 };
+
+/*
+
+AW: we can change addItem similarly 
+
+OrderSchema.methods.addItem = function(itemData) {
+  return Promise.resolve(CartItem.create(itemData)).bind(this)
+  .then(function(_newItem) {
+    this.newItem = _newItem;
+    this.items.addToSet(newItem._id);
+    return this.save();
+  })
+  .then(function() {
+    return this.newItem;
+  });
+};
+
+
+
+
+*/
 
 OrderSchema.methods.removeItem = function(itemId) {
   var order = this;

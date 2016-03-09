@@ -36,7 +36,25 @@ app.controller('ProductCtrl', function($scope, oneProduct, UserFactory, $state, 
         $scope.loggedIn = true;
        }
     })
+
+    /*
+
+        AW: 
+
+        less than ideal that you folks are persisting the cart to the backend 
+        without using localstorage
+
+        localStorage relieves us of the responsibility of persisting a cart to the 
+        backend before a user has "committed" by signing up 
+
+        perhaps you folks did it this way because you didn't look into localstorage
+        when I mentioned it last Thursday. 
+
+         
+
+    */
     // console.log('$stateParams.userId', $stateParams.userId)
+
     $scope.addToCart = function(qty) {
         // if (!userId) {
         //     if (!$localStorage.cart) $localStorage.cart = [];
